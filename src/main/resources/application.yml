@@ -1,0 +1,37 @@
+# 数据库连接配置
+spring:
+  datasource:
+    url: "jdbc:mysql://localhost:13306/community?characterEncoding=utf-8&serverTimezone=GMT%2B8"
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  thymeleaf:
+    cache: false
+# mybatis配置
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+  type-aliases-package: com.nowcoder.community.community.entity
+# 单独写一个配置文件logback
+#logback
+#logging:
+#  level:
+#    com:
+#      nowcoder:
+#        community:
+#          community: DEBUG
+  #file: e:/work/nowdatalog/community.log
+
+#分页插件
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
+#server
+server:
+  port: 8080
+  servlet:
+    context-path: /community
+

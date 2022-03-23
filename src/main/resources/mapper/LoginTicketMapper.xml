@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nowcoder.community.community.dao.LoginTicketMapper">
+  <resultMap id="BaseResultMap" type="com.nowcoder.community.community.entity.LoginTicket">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="ticket" jdbcType="VARCHAR" property="ticket" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="expired" jdbcType="TIMESTAMP" property="expired" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from login_ticket
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.nowcoder.community.community.entity.LoginTicket">
+    insert into login_ticket (id, user_id, ticket, 
+      status, expired)
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{ticket,jdbcType=VARCHAR}, 
+      #{status,jdbcType=INTEGER}, #{expired,jdbcType=TIMESTAMP})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.nowcoder.community.community.entity.LoginTicket">
+    update login_ticket
+    set user_id = #{userId,jdbcType=INTEGER},
+      ticket = #{ticket,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      expired = #{expired,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, user_id, ticket, status, expired
+    from login_ticket
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, user_id, ticket, status, expired
+    from login_ticket
+  </select>
+</mapper>
