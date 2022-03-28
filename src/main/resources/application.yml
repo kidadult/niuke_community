@@ -7,11 +7,27 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
   thymeleaf:
     cache: false
+#    prefix: classpath:/templates/
+#    suffix: .html
+#    mode: HTML5
+  #mail
+  mail:
+    host: smtp.qq.com
+    port: 465
+    username: 1411559461@qq.com
+    password: kqdxebrjtuozbabc
+    protocol: smtps
+    properties:
+      mail:
+        smtp:
+          ssl:
+            enable: true
 # mybatis配置
 mybatis:
   mapper-locations: classpath:mapper/*.xml
   configuration:
     map-underscore-to-camel-case: true
+    use-generated-keys: true
   type-aliases-package: com.nowcoder.community.community.entity
 # 单独写一个配置文件logback
 #logback
@@ -34,4 +50,9 @@ server:
   port: 8080
   servlet:
     context-path: /community
-
+# community
+community:
+  path:
+    domain: http://localhost:8080
+    # 资源(头像)上传的路径
+    upload: e:/work/data/upload
