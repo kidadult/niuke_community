@@ -18,4 +18,6 @@ public interface UserService {
      int updateHeader(int userId,String headerUrl);
 
     int updatePasswordByUserId(int userId, String newPassword);
+
+    User findUserByName(String name);
 }

@@ -6,5 +6,10 @@ import java.util.List;
 
 public interface DiscussService {
     List<DiscussPost> findDiscusspost(int userId,int offset,int limit);
-    public int findDiscussPostRows(int userId);
+    int findDiscussPostRows(int userId);
+    int addDiscussPost(DiscussPost discussPost);
+    DiscussPost findDiscussPostById(int id);
+
+    int updateCommentCount(int id,int commentCount);
+
 }

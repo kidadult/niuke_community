@@ -5,15 +5,15 @@ import lombok.Data;
 import java.util.Date;
 @Data
 public class Message {
-    private Integer id;
+    private int id;
 
-    private Integer fromId;
+    private int fromId;
 
-    private Integer toId;
+    private int toId;
 
-    private String conversationId;
+    private String conversationId;  //会话Id
 
-    private Integer status;
+    private int status;
 
     private Date createTime;
 

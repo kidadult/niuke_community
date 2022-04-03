@@ -19,10 +19,10 @@ public class SensitiveFilter {
 
     private static final Logger logger = LoggerFactory.getLogger(SensitiveFilter.class);
 
-    // 替换符
+    // 替换符(当出现敏感符的时候,替换为什么)
     private static final String REPLACEMENT = "***";
 
-    // 根节点
+    // 根节点(初始化根结点,根结点为空)
     private TrieNode rootNode = new TrieNode();
 
     @PostConstruct
@@ -33,7 +33,7 @@ public class SensitiveFilter {
         ) {
             String keyword;
             while ((keyword = reader.readLine()) != null) {
-                // 添加到前缀树
+                // 把敏感词添加到前缀树
                 this.addKeyword(keyword);
             }
         } catch (IOException e) {
@@ -59,7 +59,7 @@ public class SensitiveFilter {
 
             // 设置结束标识
             if (i == keyword.length() - 1) {
-                tempNode.setKeywordEnd(true);
+                tempNode.setKeywordEnd(true);  // 敏感词结束标志
             }
         }
     }
@@ -74,6 +74,7 @@ public class SensitiveFilter {
         if(StringUtils.isBlank(text)){
             return null;
         }
+        // 依赖的时候依赖三个指针
         // 指针1
         TrieNode tempNode = rootNode;
         // 指针2
@@ -87,17 +88,18 @@ public class SensitiveFilter {
             if(position < text.length()) {
                 Character c = text.charAt(position);
 
-                // 跳过符号
+                // 跳过符号,跳过一些特殊符号如: ❤开❤票❤
                 if (isSymbol(c)) {
+                    // 如果指针1处于根结点,将此指针计入结果,让指针二向下走一步;
                     if (tempNode == rootNode) {
                         begin++;
                         sb.append(c);
                     }
+                    // 无论符号在开头或者是中间,指针三都向下走一步
                     position++;
                     continue;
                 }
-
-                // 检查下级节点
+                // 检查下级节点(第一次是检查根结点下一个节点)
                 tempNode = tempNode.getSubNode(c);
                 if (tempNode == null) {
                     // 以begin开头的字符串不是敏感词
